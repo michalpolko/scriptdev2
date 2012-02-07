@@ -100,6 +100,9 @@ bool instance_icecrown_citadel::IsEncounterInProgress() const
     return false;
 }
 
+/**
+ * Store Guids and set correct gameobjects' states.
+ */
 void instance_icecrown_citadel::OnObjectCreate(GameObject *pGo)
 {
     switch(pGo->GetEntry())
@@ -115,6 +118,13 @@ void instance_icecrown_citadel::OnObjectCreate(GameObject *pGo)
             m_mGoEntryGuidStore[pGo->GetEntry()] = pGo->GetObjectGuid();
             break;
         case GO_DEATHWHISPER_ELEVATOR:
+            if (m_auiEncounter[TYPE_LADY_DEATHWHISPER] == DONE)
+            {
+                pGo->SetUInt32Value(GAMEOBJECT_LEVEL, 0);
+                pGo->SetGoState(GO_STATE_READY);
+            }
+            m_mGoEntryGuidStore[pGo->GetEntry()] = pGo->GetObjectGuid();
+            break;
         case GO_SAURFANG_DOOR:
             if (m_auiEncounter[TYPE_DEATHBRINGER_SAURFANG] == DONE)
                 pGo->SetGoState(GO_STATE_ACTIVE);
@@ -255,7 +265,7 @@ void instance_icecrown_citadel::OnCreatureCreate(Creature *pCreature)
 
 uint32 instance_icecrown_citadel::GetData(uint32 uiType)
 {
-    if (uiType >= MAX_ENCOUNTER)
+    if (uiType >= MAX_DATA_TYPE)
         return 0;
     else
         return m_auiEncounter[uiType];
@@ -263,17 +273,141 @@ uint32 instance_icecrown_citadel::GetData(uint32 uiType)
 
 void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
 {
-    if (uiData == DONE || uiData == FAIL)
+    switch(uiType)
+    {
+        case TYPE_MARROWGAR:
+            m_auiEncounter[TYPE_MARROWGAR] = uiData;
+            DoUseDoorOrButton(GO_MARROWGAR_DOOR);
+            if (uiData == DONE)
+            {
+                DoUseDoorOrButton(GO_ICEWALL_1);
+                DoUseDoorOrButton(GO_ICEWALL_2);
+                DoUseDoorOrButton(GO_ORATORY_DOOR);
+            }
+            break;
+         case TYPE_LADY_DEATHWHISPER:
+            m_auiEncounter[TYPE_LADY_DEATHWHISPER] = uiData;
+            DoUseDoorOrButton(GO_ORATORY_DOOR);
+            // run the elevator
+            if (uiData == DONE)
+            {
+                if (GameObject* pGO = GetSingleGameObjectFromStorage(GO_DEATHWHISPER_ELEVATOR))
+                {
+                    pGO->SetUInt32Value(GAMEOBJECT_LEVEL, 0);
+                    pGO->SetGoState(GO_STATE_READY);
+                }
+            }
+            break;
+         case TYPE_GUNSHIP_BATTLE:
+            m_auiEncounter[3] = uiData;
+            break;
+         case TYPE_DEATHBRINGER_SAURFANG:
+            m_auiEncounter[TYPE_DEATHBRINGER_SAURFANG] = uiData;
+
+            if (uiData == DONE)
+            {
+                DoUseDoorOrButton(GO_SAURFANG_DOOR);
+
+                if (GameObject* pChest = GetSingleGameObjectFromStorage(m_uiSaurfangCache))
+                {
+                    if (pChest && !pChest->isSpawned())
+                        pChest->SetRespawnTime(7*DAY);
+                }
+            }
+            break;
+         case TYPE_FESTERGUT:
+            m_auiEncounter[TYPE_FESTERGUT] = uiData;
+            DoUseDoorOrButton(GO_ORANGE_PLAGUE);
+
+            if (uiData == DONE)
+            {
+                if (m_auiEncounter[TYPE_ROTFACE] == DONE)
+                {
+                    DoUseDoorOrButton(GO_SCIENTIST_DOOR_COLLISION);
+                    DoUseDoorOrButton(GO_SCIENTIST_DOOR_ORANGE);
+                }
+            }
+            break;
+         case TYPE_ROTFACE:
+            m_auiEncounter[TYPE_ROTFACE] = uiData;
+            DoUseDoorOrButton(GO_GREEN_PLAGUE);
+
+            if (uiData == DONE)
+            {
+                if (m_auiEncounter[TYPE_FESTERGUT] == DONE)
+                {
+                    DoUseDoorOrButton(GO_SCIENTIST_DOOR_GREEN);
+                    DoUseDoorOrButton(GO_SCIENTIST_DOOR_COLLISION);
+                }
+            }
+            break;
+         case TYPE_PROFESSOR_PUTRICIDE:
+            m_auiEncounter[TYPE_PROFESSOR_PUTRICIDE] = uiData;
+            DoUseDoorOrButton(GO_SCIENTIST_DOOR);
+            break;
+         case TYPE_BLOOD_PRINCE_COUNCIL:
+            m_auiEncounter[TYPE_BLOOD_PRINCE_COUNCIL] = uiData;
+            DoUseDoorOrButton(GO_CRIMSON_HALL_DOOR);
+
+            if (uiData == DONE)
+            {
+                DoUseDoorOrButton(GO_COUNCIL_DOOR_1);
+                DoUseDoorOrButton(GO_COUNCIL_DOOR_2);
+            }
+            break;
+         case TYPE_QUEEN_LANATHEL:
+            m_auiEncounter[TYPE_QUEEN_LANATHEL] = uiData;
+            DoUseDoorOrButton(GO_BLOODPRINCE_DOOR);
+            if (uiData == DONE)
+                DoUseDoorOrButton(GO_ICECROWN_GRATE);
+            break;
+         case TYPE_VALITHRIA:
+            m_auiEncounter[TYPE_VALITHRIA] = uiData;
+            DoUseDoorOrButton(GO_GREEN_DRAGON_DOOR_1);
+            DoUseDoorOrButton(GO_VALITHRIA_DOOR_1);
+            DoUseDoorOrButton(GO_VALITHRIA_DOOR_2);
+
+            if (instance->GetDifficulty() == RAID_DIFFICULTY_25MAN_NORMAL ||
+                instance->GetDifficulty() == RAID_DIFFICULTY_25MAN_HEROIC)
+            {
+                DoUseDoorOrButton(GO_VALITHRIA_DOOR_3);
+                DoUseDoorOrButton(GO_VALITHRIA_DOOR_4);
+            }
+
+            if (uiData == DONE)
+            {
+                DoUseDoorOrButton(GO_GREEN_DRAGON_DOOR_2);
+                DoUseDoorOrButton(GO_SINDRAGOSA_DOOR_1);
+                DoUseDoorOrButton(GO_SINDRAGOSA_DOOR_2);
+
+                if (GameObject* pChest = GetSingleGameObjectFromStorage( m_uiValithriaCache))
+                {
+                    if (pChest && !pChest->isSpawned())
+                        pChest->SetRespawnTime(7*DAY);
+                }
+            }
+
+            break;
+         case TYPE_SINDRAGOSA:
+            m_auiEncounter[TYPE_SINDRAGOSA] = uiData;
+            DoUseDoorOrButton(GO_SINDRAGOSA_ENTRANCE);
+            break;
+         case TYPE_LICH_KING:
+            m_auiEncounter[TYPE_LICH_KING] = uiData;
+            break;
+         case TYPE_FROSTMOURNE_ROOM:
+             m_auiEncounter[TYPE_FROSTMOURNE_ROOM] = uiData;
+             break;
+    }
+
+    if (uiData == DONE)
     {
         OUT_SAVE_INST_DATA;
 
-        // Save all encounters, hard bosses, keepers and teleporters
         std::ostringstream saveStream;
-        saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " "
-            << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
-            << m_auiEncounter[6] << " " << m_auiEncounter[7] << " " << m_auiEncounter[8] << " "
-            << m_auiEncounter[9] << " " << m_auiEncounter[10] << " " << m_auiEncounter[11] << " "
-            << m_auiEncounter[12] << " " << m_auiEncounter[13];
+
+        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+            saveStream << m_auiEncounter[i] << " ";
 
         m_strInstData = saveStream.str();
 
