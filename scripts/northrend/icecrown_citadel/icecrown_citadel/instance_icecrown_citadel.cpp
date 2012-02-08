@@ -32,37 +32,6 @@ instance_icecrown_citadel::instance_icecrown_citadel(Map *pMap) : ScriptedInstan
 void instance_icecrown_citadel::Initialize()
 {
     memset(&m_auiEncounter, 0, sizeof(m_auiEncounter));
-
-    // to make respawning chests a little easier
-    switch (instance->GetDifficulty())
-    {
-        case RAID_DIFFICULTY_10MAN_NORMAL:
-            m_uiGunshipArmoryH_ID = GO_GUNSHIP_ARMORY_H_10;
-            m_uiGunshipArmoryA_ID = GO_GUNSHIP_ARMORY_A_10;
-            m_uiValithriaCache = GO_DREAMWALKER_CACHE_10;
-            m_uiSaurfangCache = GO_SAURFANG_CACHE_10;
-            break;
-        case RAID_DIFFICULTY_10MAN_HEROIC:
-            m_uiGunshipArmoryH_ID = GO_GUNSHIP_ARMORY_H_10H;
-            m_uiGunshipArmoryA_ID = GO_GUNSHIP_ARMORY_A_10H;
-            m_uiValithriaCache = GO_DREAMWALKER_CACHE_10_H;
-            m_uiSaurfangCache = GO_SAURFANG_CACHE_10_H;
-            break;
-        case RAID_DIFFICULTY_25MAN_NORMAL:
-            m_uiGunshipArmoryH_ID = GO_GUNSHIP_ARMORY_H_25;
-            m_uiGunshipArmoryA_ID = GO_GUNSHIP_ARMORY_A_25;
-            m_uiValithriaCache = GO_DREAMWALKER_CACHE_25;
-            m_uiSaurfangCache = GO_SAURFANG_CACHE_25;
-            break;
-        case RAID_DIFFICULTY_25MAN_HEROIC:
-            m_uiGunshipArmoryH_ID = GO_GUNSHIP_ARMORY_H_25H;
-            m_uiGunshipArmoryA_ID = GO_GUNSHIP_ARMORY_A_25H;
-            m_uiValithriaCache = GO_DREAMWALKER_CACHE_25_H;
-            m_uiSaurfangCache = GO_SAURFANG_CACHE_25_H;
-            break;
-        default:
-            break;
-    }
 }
 
 void instance_icecrown_citadel::Load(const char *strIn)
@@ -100,6 +69,11 @@ bool instance_icecrown_citadel::IsEncounterInProgress() const
     return false;
 }
 
+void instance_icecrown_citadel::OnPlayerEnter(Player *pPlayer)
+{
+    m_uiRaidTeam = pPlayer->GetTeam();
+}
+
 /**
  * Store Guids and set correct gameobjects' states.
  */
@@ -118,11 +92,6 @@ void instance_icecrown_citadel::OnObjectCreate(GameObject *pGo)
             m_mGoEntryGuidStore[pGo->GetEntry()] = pGo->GetObjectGuid();
             break;
         case GO_DEATHWHISPER_ELEVATOR:
-            if (m_auiEncounter[TYPE_LADY_DEATHWHISPER] == DONE)
-            {
-                pGo->SetUInt32Value(GAMEOBJECT_LEVEL, 0);
-                pGo->SetGoState(GO_STATE_READY);
-            }
             m_mGoEntryGuidStore[pGo->GetEntry()] = pGo->GetObjectGuid();
             break;
         case GO_SAURFANG_DOOR:
@@ -190,22 +159,30 @@ void instance_icecrown_citadel::OnObjectCreate(GameObject *pGo)
                 pGo->SetGoState(GO_STATE_ACTIVE);
             m_mGoEntryGuidStore[pGo->GetEntry()] = pGo->GetObjectGuid();
             break;
-        case GO_SAURFANG_CACHE_10:
+        case GO_SAURFANG_CACHE:
         case GO_SAURFANG_CACHE_25:
         case GO_SAURFANG_CACHE_10_H:
         case GO_SAURFANG_CACHE_25_H:
-        case GO_GUNSHIP_ARMORY_A_10:
+            m_mGoEntryGuidStore[GO_SAURFANG_CACHE] = pGo->GetObjectGuid();
+            break;
+        case GO_GUNSHIP_ARMORY_A:
         case GO_GUNSHIP_ARMORY_A_25:
         case GO_GUNSHIP_ARMORY_A_10H:
         case GO_GUNSHIP_ARMORY_A_25H:
-        case GO_GUNSHIP_ARMORY_H_10:
+            m_mGoEntryGuidStore[GO_GUNSHIP_ARMORY_A] = pGo->GetObjectGuid();
+            break;
+        case GO_GUNSHIP_ARMORY_H:
         case GO_GUNSHIP_ARMORY_H_25:
         case GO_GUNSHIP_ARMORY_H_10H:
         case GO_GUNSHIP_ARMORY_H_25H:
-        case GO_DREAMWALKER_CACHE_10:
+            m_mGoEntryGuidStore[GO_GUNSHIP_ARMORY_H] = pGo->GetObjectGuid();
+            break;
+        case GO_DREAMWALKER_CACHE:
         case GO_DREAMWALKER_CACHE_25:
         case GO_DREAMWALKER_CACHE_10_H:
         case GO_DREAMWALKER_CACHE_25_H:
+            m_mGoEntryGuidStore[GO_DREAMWALKER_CACHE] = pGo->GetObjectGuid();
+            break;
         case GO_ICESHARD_1:
         case GO_ICESHARD_2:
         case GO_ICESHARD_3:
@@ -289,17 +266,26 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
             m_auiEncounter[TYPE_LADY_DEATHWHISPER] = uiData;
             DoUseDoorOrButton(GO_ORATORY_DOOR);
             // run the elevator
-            if (uiData == DONE)
+            // currently elevator moving after spawning, don't know how to make it stop :/
+            /*if (uiData == DONE)
             {
                 if (GameObject* pGO = GetSingleGameObjectFromStorage(GO_DEATHWHISPER_ELEVATOR))
                 {
                     pGO->SetUInt32Value(GAMEOBJECT_LEVEL, 0);
                     pGO->SetGoState(GO_STATE_READY);
                 }
-            }
+            }*/
             break;
          case TYPE_GUNSHIP_BATTLE:
-            m_auiEncounter[3] = uiData;
+            m_auiEncounter[TYPE_GUNSHIP_BATTLE] = uiData;
+
+            if (uiData == DONE)
+            {
+                if (GetRaidTeam() == ALLIANCE)
+                    DoRespawnGameObject(GO_GUNSHIP_ARMORY_A, 60 * MINUTE * IN_MILLISECONDS);
+                else
+                    DoRespawnGameObject(GO_GUNSHIP_ARMORY_H, 60 * MINUTE * IN_MILLISECONDS);
+            }
             break;
          case TYPE_DEATHBRINGER_SAURFANG:
             m_auiEncounter[TYPE_DEATHBRINGER_SAURFANG] = uiData;
@@ -307,12 +293,7 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
             if (uiData == DONE)
             {
                 DoUseDoorOrButton(GO_SAURFANG_DOOR);
-
-                if (GameObject* pChest = GetSingleGameObjectFromStorage(m_uiSaurfangCache))
-                {
-                    if (pChest && !pChest->isSpawned())
-                        pChest->SetRespawnTime(7*DAY);
-                }
+                DoRespawnGameObject(GO_SAURFANG_CACHE, 60 * MINUTE * IN_MILLISECONDS);
             }
             break;
          case TYPE_FESTERGUT:
@@ -321,11 +302,10 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
 
             if (uiData == DONE)
             {
+                DoUseDoorOrButton(GO_SCIENTIST_DOOR_ORANGE);
+
                 if (m_auiEncounter[TYPE_ROTFACE] == DONE)
-                {
                     DoUseDoorOrButton(GO_SCIENTIST_DOOR_COLLISION);
-                    DoUseDoorOrButton(GO_SCIENTIST_DOOR_ORANGE);
-                }
             }
             break;
          case TYPE_ROTFACE:
@@ -334,11 +314,10 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
 
             if (uiData == DONE)
             {
+                DoUseDoorOrButton(GO_SCIENTIST_DOOR_GREEN);
+
                 if (m_auiEncounter[TYPE_FESTERGUT] == DONE)
-                {
-                    DoUseDoorOrButton(GO_SCIENTIST_DOOR_GREEN);
                     DoUseDoorOrButton(GO_SCIENTIST_DOOR_COLLISION);
-                }
             }
             break;
          case TYPE_PROFESSOR_PUTRICIDE:
@@ -379,12 +358,7 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
                 DoUseDoorOrButton(GO_GREEN_DRAGON_DOOR_2);
                 DoUseDoorOrButton(GO_SINDRAGOSA_DOOR_1);
                 DoUseDoorOrButton(GO_SINDRAGOSA_DOOR_2);
-
-                if (GameObject* pChest = GetSingleGameObjectFromStorage( m_uiValithriaCache))
-                {
-                    if (pChest && !pChest->isSpawned())
-                        pChest->SetRespawnTime(7*DAY);
-                }
+                DoRespawnGameObject(GO_DREAMWALKER_CACHE, 60 * MINUTE * IN_MILLISECONDS);
             }
 
             break;
@@ -424,6 +398,11 @@ bool instance_icecrown_citadel::CheckAchievementCriteriaMeet(uint32 uiCriteriaId
 bool instance_icecrown_citadel::CheckConditionCriteriaMeet(Player const* pSource, uint32 uiMapId, uint32 uiInstanceConditionId)
 {
     return false;
+}
+
+Team instance_icecrown_citadel::GetRaidTeam()
+{
+    return m_uiRaidTeam;
 }
 
 InstanceData* GetInstanceData_instance_icecrown_citadel(Map* pMap)

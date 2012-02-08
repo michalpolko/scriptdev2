@@ -114,22 +114,22 @@ enum
     GO_BLOODWING_SIGIL          = 202183,
 
     // loot chests
-    GO_SAURFANG_CACHE_10        = 202239,
+    GO_SAURFANG_CACHE           = 202239,
     GO_SAURFANG_CACHE_25        = 202240,
     GO_SAURFANG_CACHE_10_H      = 202238,
     GO_SAURFANG_CACHE_25_H      = 202241,
 
-    GO_GUNSHIP_ARMORY_A_10      = 201872,
+    GO_GUNSHIP_ARMORY_A         = 201872,
     GO_GUNSHIP_ARMORY_A_25      = 201873,
     GO_GUNSHIP_ARMORY_A_10H     = 201874,
     GO_GUNSHIP_ARMORY_A_25H     = 201875,
 
-    GO_GUNSHIP_ARMORY_H_10      = 202177,
+    GO_GUNSHIP_ARMORY_H         = 202177,
     GO_GUNSHIP_ARMORY_H_25      = 202178,
     GO_GUNSHIP_ARMORY_H_10H     = 202179,
     GO_GUNSHIP_ARMORY_H_25H     = 202180,
 
-    GO_DREAMWALKER_CACHE_10      = 201959,
+    GO_DREAMWALKER_CACHE         = 201959,
     GO_DREAMWALKER_CACHE_25      = 202339,
     GO_DREAMWALKER_CACHE_10_H    = 202338,
     GO_DREAMWALKER_CACHE_25_H    = 202340
@@ -150,6 +150,8 @@ class MANGOS_DLL_DECL instance_icecrown_citadel : public ScriptedInstance
 
         bool IsEncounterInProgress() const;
 
+        void OnPlayerEnter(Player *pPlayer);
+
         void OnObjectCreate(GameObject *pGo);
         void OnCreatureCreate(Creature * pCreature);
 
@@ -159,15 +161,14 @@ class MANGOS_DLL_DECL instance_icecrown_citadel : public ScriptedInstance
         bool CheckAchievementCriteriaMeet(uint32 uiCriteriaId, Player const* pSource, Unit const* pTarget = NULL, uint32 uiMiscvalue1 = 0);
         bool CheckConditionCriteriaMeet(Player const* pSource, uint32 uiMapId, uint32 uiInstanceConditionId);
 
+        Team GetRaidTeam();
+
     private:
         std::string m_strInstData;
         uint32 m_auiEncounter[MAX_ENCOUNTER];
 
-        // loot chests entries dependent on instance difficulty
-        uint32 m_uiGunshipArmoryA_ID;
-        uint32 m_uiGunshipArmoryH_ID;
-        uint32 m_uiSaurfangCache;
-        uint32 m_uiValithriaCache;
+        // raid is from Alliance or Horde?
+        Team m_uiRaidTeam;
 };
 
 #endif
