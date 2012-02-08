@@ -206,4 +206,25 @@ class MANGOS_DLL_DECL instance_icecrown_citadel : public ScriptedInstance
         Team m_uiRaidTeam;
 };
 
+class MANGOS_DLL_DECL base_icc_creatureAI : public ScriptedAI
+{
+    public:
+        base_icc_creatureAI(Creature* pCreature) : ScriptedAI(pCreature)
+        {
+            m_pInstance = (ScriptedInstance*)pCreature->GetInstanceData();
+            m_uiMapDifficulty = pCreature->GetMap()->GetDifficulty();
+            m_bIsHeroic = m_uiMapDifficulty > RAID_DIFFICULTY_25MAN_NORMAL;
+            m_bIs25Man = (m_uiMapDifficulty == RAID_DIFFICULTY_25MAN_NORMAL || m_uiMapDifficulty == RAID_DIFFICULTY_25MAN_HEROIC);
+        }
+
+        virtual void Reset();
+        virtual void UpdateAI(const uint32 uiDiff);
+
+    protected:
+        ScriptedInstance* m_pInstance;
+        Difficulty m_uiMapDifficulty;
+        bool m_bIsHeroic;
+        bool m_bIs25Man;
+};
+
 #endif
