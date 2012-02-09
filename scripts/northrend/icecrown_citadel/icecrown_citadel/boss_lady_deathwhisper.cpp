@@ -140,7 +140,7 @@ class MANGOS_DLL_DECL boss_lady_deathwhisper_eventAI : public base_icc_creatureA
 
             if (!m_bIsEventStarted)
             {
-                if (pWho->GetTypeId() == TYPEID_PLAYER)
+                if (pWho->GetTypeId() == TYPEID_PLAYER && !((Player*)pWho)->isGameMaster())
                 {
                     m_bIsEventStarted = true;
                     NextStep();
@@ -702,5 +702,15 @@ void AddSC_boss_lady_deathwhisper()
     pNewScript = new Script;
     pNewScript->Name = "boss_lady_deathwhisper";
     pNewScript->GetAI = &GetAI_boss_lady_deathwhisper;
+    pNewScript->RegisterSelf();
+
+    pNewScript = new Script;
+    pNewScript->Name = "mob_cult_adherent";
+    pNewScript->GetAI = &GetAI_mob_cult_adherent;
+    pNewScript->RegisterSelf();
+
+    pNewScript = new Script;
+    pNewScript->Name = "mob_cult_fanatic";
+    pNewScript->GetAI = &GetAI_mob_cult_fanatic;
     pNewScript->RegisterSelf();
 }
