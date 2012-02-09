@@ -217,8 +217,8 @@ class MANGOS_DLL_DECL base_icc_creatureAI : public ScriptedAI
             m_bIs25Man = (m_uiMapDifficulty == RAID_DIFFICULTY_25MAN_NORMAL || m_uiMapDifficulty == RAID_DIFFICULTY_25MAN_HEROIC);
         }
 
-        virtual void Reset(){}
-        virtual void UpdateAI(const uint32 uiDiff){}
+        virtual void Reset() = 0;
+        virtual void UpdateAI(const uint32 uiDiff) = 0;
 
     protected:
         ScriptedInstance* m_pInstance;
