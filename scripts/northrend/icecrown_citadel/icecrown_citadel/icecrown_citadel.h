@@ -170,6 +170,11 @@ enum AchievementCriteriaIds
     CRITERIA_ONCE_BITTEN_TWICE_SHY_25V  = 13013,
 };
 
+struct Locations
+{
+    float x, y, z;
+};
+
 class MANGOS_DLL_DECL instance_icecrown_citadel : public ScriptedInstance
 {
     public:
