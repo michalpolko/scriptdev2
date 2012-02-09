@@ -282,9 +282,9 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
             if (uiData == DONE)
             {
                 if (GetRaidTeam() == ALLIANCE)
-                    DoRespawnGameObject(GO_GUNSHIP_ARMORY_A, 60 * MINUTE * IN_MILLISECONDS);
+                    DoRespawnGameObject(GO_GUNSHIP_ARMORY_A, 60*MINUTE);
                 else
-                    DoRespawnGameObject(GO_GUNSHIP_ARMORY_H, 60 * MINUTE * IN_MILLISECONDS);
+                    DoRespawnGameObject(GO_GUNSHIP_ARMORY_H, 60*MINUTE);
             }
             break;
          case TYPE_DEATHBRINGER_SAURFANG:
@@ -293,7 +293,7 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
             if (uiData == DONE)
             {
                 DoUseDoorOrButton(GO_SAURFANG_DOOR);
-                DoRespawnGameObject(GO_SAURFANG_CACHE, 60 * MINUTE * IN_MILLISECONDS);
+                DoRespawnGameObject(GO_SAURFANG_CACHE, 60*MINUTE);
             }
             break;
          case TYPE_FESTERGUT:
@@ -358,7 +358,7 @@ void instance_icecrown_citadel::SetData(uint32 uiType, uint32 uiData)
                 DoUseDoorOrButton(GO_GREEN_DRAGON_DOOR_2);
                 DoUseDoorOrButton(GO_SINDRAGOSA_DOOR_1);
                 DoUseDoorOrButton(GO_SINDRAGOSA_DOOR_2);
-                DoRespawnGameObject(GO_DREAMWALKER_CACHE, 60 * MINUTE * IN_MILLISECONDS);
+                DoRespawnGameObject(GO_DREAMWALKER_CACHE, 60*MINUTE);
             }
 
             break;
