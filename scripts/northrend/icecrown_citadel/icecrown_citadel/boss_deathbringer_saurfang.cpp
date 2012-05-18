@@ -505,9 +505,14 @@ struct MANGOS_DLL_DECL boss_deathbringer_saurfangAI : public ScriptedAI
     {
         m_powerBloodPower = m_creature->getPowerType(); // don't call this function multiple times in script
         m_bIsIntroStarted = false;
+        m_pInstance = (instance_icecrown_citadel*)pCreature->GetMap()->GetInstanceData();
+        m_bIsHeroic = m_pInstance ? m_pInstance->IsHeroicDifficulty() : false;
+        m_bIs25Man = m_pInstance ? m_pInstance->Is25ManDifficulty() : false;
         m_guidEventNpcGuid.Clear();
         Reset();
     }
+
+    instance_icecrown_citadel *m_pInstance;
 
     uint32 m_uiRuneOfBloodTimer;
     uint32 m_uiBoilingBloodTimer;
@@ -519,6 +524,8 @@ struct MANGOS_DLL_DECL boss_deathbringer_saurfangAI : public ScriptedAI
     bool m_bIsFrenzied;
     bool m_bIsIntroStarted;
     bool m_bIsAlliance;
+    bool m_bIsHeroic;
+    bool m_bIs25Man;
 
     Powers m_powerBloodPower;
     ObjectGuid m_guidEventNpcGuid;
@@ -546,7 +553,7 @@ struct MANGOS_DLL_DECL boss_deathbringer_saurfangAI : public ScriptedAI
             m_bIsIntroStarted = true;
         }
 
-        base_icc_creatureAI::MoveInLineOfSight(pWho);
+        ScriptedAI::MoveInLineOfSight(pWho);
     }
 
     void DoSummonEventNpc()
