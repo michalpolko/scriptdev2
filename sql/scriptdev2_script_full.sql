@@ -176,7 +176,7 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1000205,'%s looks at you unexpectadly.',0,2,0,0,'cluck EMOTE_H_HELLO'),
 (-1000206,'%s starts pecking at the feed.',0,2,0,0,'cluck EMOTE_CLUCK_TEXT2'),
 
-(-1000207,'You have my blessing',0,0,0,0,'ashyen_and_keleth SAY_REWARD_BLESS'),
+(-1000207,'REUSE ME',0,0,0,0,'REUSE ME'),
 
 (-1000208,'REUSE ME',0,0,0,0,'REUSE ME'),
 
@@ -1571,25 +1571,25 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1533043,'I have waited long enough! Now, you face the harvester of souls!',8808,1,0,0,'gothik SAY_TELEPORT'),
 
 (-1533044,'Defend youself!',8892,1,0,0,'blaumeux SAY_BLAU_AGGRO'),
-(-1533045,'Come, Zeliek, do not drive them out. Not before we\'ve had our fun.',8896,1,0,0,'blaumeux SAY_BLAU_TAUNT1'),
-(-1533046,'I do hope they stay alive long enough for me to... introduce myself.',8897,1,0,0,'blaumeux SAY_BLAU_TAUNT2'),
-(-1533047,'The first kill goes to me! Anyone care to wager?',8898,1,0,0,'blaumeux SAY_BLAU_TAUNT3'),
+(-1533045,'Come, Zeliek, do not drive them out. Not before we\'ve had our fun.',8896,6,0,0,'blaumeux SAY_BLAU_TAUNT1'),
+(-1533046,'I do hope they stay alive long enough for me to... introduce myself.',8897,6,0,0,'blaumeux SAY_BLAU_TAUNT2'),
+(-1533047,'The first kill goes to me! Anyone care to wager?',8898,6,0,0,'blaumeux SAY_BLAU_TAUNT3'),
 (-1533048,'Your life is mine!',8895,1,0,0,'blaumeux SAY_BLAU_SPECIAL'),
 (-1533049,'Who\'s next?',8894,1,0,0,'blaumeux SAY_BLAU_SLAY'),
 (-1533050,'Tou... che!',8893,1,0,0,'blaumeux SAY_BLAU_DEATH'),
 
 (-1533051,'Come out and fight, ye wee ninny!',8899,1,0,0,'korthazz SAY_KORT_AGGRO'),
-(-1533052,'To arms, ye roustabouts! We\'ve got company!',8903,1,0,0,'korthazz SAY_KORT_TAUNT1'),
-(-1533053,'I heard about enough of yer sniveling. Shut yer fly trap \'afore I shut it for ye!',8904,1,0,0,'korthazz SAY_KORT_TAUNT2'),
-(-1533054,'I\'m gonna enjoy killin\' these slack-jawed daffodils!',8905,1,0,0,'korthazz SAY_KORT_TAUNT3'),
+(-1533052,'To arms, ye roustabouts! We\'ve got company!',8903,6,0,0,'korthazz SAY_KORT_TAUNT1'),
+(-1533053,'I heard about enough of yer sniveling. Shut yer fly trap \'afore I shut it for ye!',8904,6,0,0,'korthazz SAY_KORT_TAUNT2'),
+(-1533054,'I\'m gonna enjoy killin\' these slack-jawed daffodils!',8905,6,0,0,'korthazz SAY_KORT_TAUNT3'),
 (-1533055,'I like my meat extra crispy!',8902,1,0,0,'korthazz SAY_KORT_SPECIAl'),
 (-1533056,'Next time, bring more friends!',8901,1,0,0,'korthazz SAY_KORT_SLAY'),
 (-1533057,'What a bloody waste this is!',8900,1,0,0,'korthazz SAY_KORT_DEATH'),
 
 (-1533058,'Flee, before it\'s too late!',8913,1,0,0,'zeliek SAY_ZELI_AGGRO'),
-(-1533059,'Invaders, cease this foolish venture at once! Turn away while you still can!',8917,1,0,0,'zeliek SAY_ZELI_TAUNT1'),
-(-1533060,'Perhaps they will come to their senses, and run away as fast as they can!',8918,1,0,0,'zeliek SAY_ZELI_TAUNT2'),
-(-1533061,'Do not continue! Turn back while there\'s still time!',8919,1,0,0,'zeliek SAY_ZELI_TAUNT3'),
+(-1533059,'Invaders, cease this foolish venture at once! Turn away while you still can!',8917,6,0,0,'zeliek SAY_ZELI_TAUNT1'),
+(-1533060,'Perhaps they will come to their senses, and run away as fast as they can!',8918,6,0,0,'zeliek SAY_ZELI_TAUNT2'),
+(-1533061,'Do not continue! Turn back while there\'s still time!',8919,6,0,0,'zeliek SAY_ZELI_TAUNT3'),
 (-1533062,'I- I have no choice but to obey!',8916,1,0,0,'zeliek SAY_ZELI_SPECIAL'),
 (-1533063,'Forgive me!',8915,1,0,0,'zeliek SAY_ZELI_SLAY'),
 (-1533064,'It is... as it should be.',8914,1,0,0,'zeliek SAY_ZELI_DEATH'),
@@ -1600,9 +1600,9 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1533068,'You will find no peace in death.',14574,1,0,0,'rivendare_naxx SAY_RIVE_SLAY1'),
 (-1533069,'The master\'s will is done.',14575,1,0,0,'rivendare_naxx SAY_RIVE_SLAY2'),
 (-1533070,'Bow to the might of the scourge!',14576,1,0,0,'rivendare_naxx SAY_RIVE_SPECIAL'),
-(-1533071,'Enough prattling. Let them come! We shall grind their bones to dust.',14577,1,0,0,'rivendare_naxx SAY_RIVE_TAUNT1'),
-(-1533072,'Conserve your anger! Harness your rage! You will all have outlets for your frustration soon enough.',14578,1,0,0,'rivendare_naxx SAY_RIVE_TAUNT2'),
-(-1533073,'Life is meaningless. It is in death that we are truly tested.',14579,1,0,0,'rivendare_naxx SAY_RIVE_TAUNT3'),
+(-1533071,'Enough prattling. Let them come! We shall grind their bones to dust.',14577,6,0,0,'rivendare_naxx SAY_RIVE_TAUNT1'),
+(-1533072,'Conserve your anger! Harness your rage! You will all have outlets for your frustration soon enough.',14578,6,0,0,'rivendare_naxx SAY_RIVE_TAUNT2'),
+(-1533073,'Life is meaningless. It is in death that we are truly tested.',14579,6,0,0,'rivendare_naxx SAY_RIVE_TAUNT3'),
 (-1533074,'Death... will not stop me...',14580,1,0,0,'rivendare_naxx SAY_RIVE_DEATH'),
 
 (-1533075,'Glory to the master!',8845,1,0,0,'noth SAY_AGGRO1'),
@@ -2110,7 +2110,8 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1554024,'I prefeer to be hands-on...',11199,1,0,0,'pathaleon SAY_ENRAGE'),
 (-1554025,'A minor inconvenience.',11194,1,0,0,'pathaleon SAY_SLAY_1'),
 (-1554026,'Looks like you lose.',11195,1,0,0,'pathaleon SAY_SLAY_2'),
-(-1554027,'The project will... continue.',11200,1,0,0,'pathaleon SAY_DEATH');
+(-1554027,'The project will... continue.',11200,1,0,0,'pathaleon SAY_DEATH'),
+(-1554028,'I have been waiting for you!',0,1,0,0,'pathaleon SAY_INTRO');
 
 -- -1 555 000 SHADOW LABYRINTH
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
@@ -2681,7 +2682,12 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1578019,'Savor this small victory, foolish little creatures. You and your dragon allies have won this battle. But we will win... the Nexus War.',13631,1,0,0,'eregos SAY_DEATH'),
 
 (-1578020,'Intruders, your victory will be short-lived. I am Commander Varos Cloudstrider. My drakes control the skies and protect this conduit. I will see to it personally that the Oculus does not fall into your hands!',13648,6,0,0,'varos SAY_VAROS_INTRO'),
-(-1578021,'Thank you for freeing us, mortals. Beware, the Blue Flight is alerted to your presence. Even now, Malygos sends Varos Cloudstrider and his ring guardians to defend the Oculus. You will need our help to stand a chance.',0,0,0,1,'belgaristrasz SAY_BELGARISTRASZ_GREET');
+(-1578021,'Thank you for freeing us, mortals. Beware, the Blue Flight is alerted to your presence. Even now, Malygos sends Varos Cloudstrider and his ring guardians to defend the Oculus. You will need our help to stand a chance.',0,0,0,1,'belgaristrasz SAY_BELGARISTRASZ_GREET'),
+(-1578022,'The trickster Mage-Lord Urom protects the third ring. He will appear alone and defenseless, but do not be fooled by appearances! Urom is a powerful conjurer who commands a menagerie of Phantasmal creatures. Seek him out above.',0,0,0,1,'belgaristrasz SAY_BELGARISTRASZ_UROM'),
+(-1578023,'Your greatest challenge lies ahead. Ley-Guardian Eregos is a Blue dragon of immense power. You will find him flying above the uppermost ring.',0,0,0,1,'belgaristrasz SAY_BELGARISTRASZ_EREGOS'),
+
+(-1578024,'Anomalies form as %s shifts into the Astral Plane!',0,3,0,0,'eregos EMOTE_ASTRAL_PLANE'),
+(-1578025,'%s begins to cast Empowered Arcane Explosion!',0,3,0,0,'urom EMOTE_EXPLOSION');
 
 -- -1 580 000 SUNWELL PLATEAU
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
@@ -3340,8 +3346,8 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 
 -- -1 608 000 VIOLET HOLD
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
-(-1608000,'Prison guards, we are leaving! These adventurers are taking over! Go, go, go!',0,1,0,0,'sinclair SAY_BEGIN'),
-(-1608001,'I\'m locking the door. Good luck, and thank you for doing this.',0,0,0,0,'sinclair SAY_LOCK_DOOR'),
+(-1608000,'Prison guards, we are leaving! These adventurers are taking over! Go, go, go!',0,1,0,0,'sinclari SAY_BEGIN'),
+(-1608001,'I\'m locking the door. Good luck, and thank you for doing this.',0,0,0,1,'sinclari SAY_LOCK_DOOR'),
 
 (-1608002,'Adventurers, the door is beinning to weaken!',0,1,0,0,'sinclair SAY_SEAL_75'),
 (-1608003,'Only half of the door seal\'s strength remains! You must fight on!',0,1,0,0,'sinclair SAY_SEAL_50'),
@@ -3368,7 +3374,11 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1608023,'I shall pass!',14235,1,0,0,'ichoron SAY_SLAY_2'),
 (-1608024,'You can not stop the tide!',14236,1,0,0,'ichoron SAY_SLAY_3'),
 (-1608025,'I shall consume,decimate, devastate,and destroy! Yield now to the wrath of the pounding sea!',14231,1,0,0,'ichoron SAY_ENRAGE'),
-(-1608026,'I... recede.',14237,1,0,0,'ichoron SAY_DEATH');
+(-1608026,'I... recede.',14237,1,0,0,'ichoron SAY_DEATH'),
+
+(-1608027,'You did it! You held the Blue Dragonflight back and defeated their commander. Amazing work!',0,0,0,1,'sinclari SAY_VICTORY'),
+
+(-1608028,'%s\'s Protective Bubble shatters!',0,3,0,0,'ichoron EMOTE_BUBBLE');
 
 -- -1 609 000 EBON HOLD (DK START)
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
@@ -3816,7 +3826,10 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1631189,'THE LICH KING...MUST...FALL!',17389,1,0,0,'tirion SAY_OUTRO_11'),
 (-1631190,'Now I stand, the lion before the lambs... and they do not fear.',17361,1,0,0,'lich_king SAY_OUTRO_12'),
 (-1631191,'They cannot fear.',17362,1,0,0,'lich_king SAY_OUTRO_13'),
-(-1631192,'%s dies',17374,2,0,0,'lich_king SAY_OUTRO_14'); -- TODO Can be wrong
+(-1631192,'%s dies',17374,2,0,0,'lich_king SAY_OUTRO_14'), -- TODO Can be wrong
+
+(-1631193,'%s goes into a frenzy!',0,3,0,0,'saurfang EMOTE_FRENZY'),
+(-1631194,'%s\'s Blood Beasts gain the scent of blood!',0,3,0,0,'saurfang EMOTE_SCENT');
 
 -- -1 632 000 ICC: FORGE OF SOULS
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
@@ -4183,7 +4196,8 @@ INSERT INTO gossip_texts (entry,content_default,comment) VALUES
 -- -3 608 000 VIOLET HOLD
 INSERT INTO gossip_texts (entry,content_default,comment) VALUES
 (-3608000,'Activate the crystals when we get in trouble, right?','sinclari GOSSIP_ITEM_INTRO'),
-(-3608001,'Get your people to safety, we\'ll keep the Blue Dragonflight\'s forces at bay.','sinclari GOSSIP_ITEM_START');
+(-3608001,'Get your people to safety, we\'ll keep the Blue Dragonflight\'s forces at bay.','sinclari GOSSIP_ITEM_START'),
+(-3608002,'I\'m not fighting, so send me in now!','sinclari GOSSIP_ITEM_TELEPORT');
 
 -- -3 649 000 TRIAL OF CRUSADER
 INSERT INTO gossip_texts (entry,content_default,comment) VALUES
@@ -5926,9 +5940,10 @@ DELETE FROM script_waypoint WHERE entry=30658;
 INSERT INTO script_waypoint VALUES
 (30658, 0, 1830.504517, 799.356506, 44.341801, 5000, 'use activation'),
 (30658, 1, 1832.461792, 800.431396, 44.311745, 10000, 'SAY_BEGIN call back guards'),
-(30658, 2, 1824.786987, 803.828369, 44.363434, 0, 'SAY_LOCK_DOOR close door'),
-(30658, 3, 1807.245483, 803.904114, 44.363434, 0, ''),
-(30658, 4, 1785.160400, 803.856873, 44.364830, 30000, '');
+(30658, 2, 1824.786987, 803.828369, 44.363434, 3000, 'SAY_LOCK_DOOR'),
+(30658, 3, 1824.786987, 803.828369, 44.363434, 0, 'close door'),
+(30658, 4, 1817.315674, 804.060608, 44.363998, 0, 'escort paused - allow teleport inside'),
+(30658, 5, 1826.889648, 803.929993, 44.363239, 30000, 'SAY_VICTORY');
 
 DELETE FROM script_waypoint WHERE entry = 349;
 INSERT INTO script_waypoint VALUES
