@@ -875,7 +875,19 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1000811,'Farewell, mortals... The earthmender knows what fire feels...',0,0,0,0, 'Spirit of Earth SAY_EARTH_EPILOGUE_6'),
 (-1000812,'We leave, Torlok. I have only one request...',0,0,0,1,'Oronok SAY_ORONOK_EPILOGUE_7'),
 (-1000813,'The Torn-heart men give their weapons to Earthmender Torlok.',0,2,0,0,'Torlok EMOTE_GIVE_WEAPONS'),
-(-1000814,'Give these to the heroes that made this possible.',0,0,0,1,'Oronok SAY_ORONOK_EPILOGUE_8');
+(-1000814,'Give these to the heroes that made this possible.',0,0,0,1,'Oronok SAY_ORONOK_EPILOGUE_8'),
+
+(-1000815,'Be healed!',0,1,0,0,'Eris Havenfire SAY_PHASE_HEAL'),
+(-1000816,'We are saved! The peasants have escaped the Scourge!',0,1,0,0,'Eris Havenfire SAY_EVENT_END'),
+(-1000817,'I have failed once more...',0,1,0,0,'Eris Havenfire SAY_EVENT_FAIL_1'),
+(-1000818,'I now return to whence I came, only to find myself here once more to relive the same epic tragedy.',0,0,0,0,'Eris Havenfire SAY_EVENT_FAIL_2'),
+(-1000819,'The Scourge are upon us! Run! Run for your lives!',0,1,0,0,'Peasant SAY_PEASANT_APPEAR_1'),
+(-1000820,'Please help us! The Prince has gone mad!',0,1,0,0,'Peasant SAY_PEASANT_APPEAR_2'),
+(-1000821,'Seek sanctuary in Hearthglen! It is our only hope!',0,1,0,0,'Peasant SAY_PEASANT_APPEAR_3'),
+
+(-1000822,'The signal has been sent. He should be arriving shortly.',0,0,0,1,'squire rowe SAY_SIGNAL_SENT'),
+(-1000823,'Yawww!',0,0,0,35,'reginald windsor SAY_DISMOUNT'),
+(-1000824,'I knew you would come, $N. It is good to see you again, friend.',0,0,0,1,'reginald windsor SAY_WELCOME');
 
 -- -1 033 000 SHADOWFANG KEEP
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
@@ -2174,7 +2186,13 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1556011,'You die..<squawk>..stay away from Trinkets',10558,1,0,0,'ikiss SAY_SLAY_1'),
 (-1556012,'<squawk>',10559,1,0,0,'ikiss SAY_SLAY_2'),
 (-1556013,'Ikiss will not..<squawk>..die',10560,1,0,0,'ikiss SAY_DEATH'),
-(-1556015,'%s begins to channel arcane energy...',0,3,0,0,'ikiss EMOTE_ARCANE_EXP');
+(-1556015,'%s begins to channel arcane energy...',0,3,0,0,'ikiss EMOTE_ARCANE_EXP'),
+
+(-1556016,'No! How can this be?',0,1,0,0,'anzu SAY_INTRO_1'),
+(-1556017,'Pain will be the price for your insolence! You cannot stop me from claiming the Emerald Dream as my own!',0,1,0,0,'anzu SAY_INTRO_2'),
+(-1556018,'Awaken, my children and assist your master!',0,1,0,0,'anzu SAY_BANISH'),
+(-1556019,'Your magics shall be your undoing... ak-a-ak...',0,4,0,0,'anzu SAY_WHISPER_MAGIC'),
+(-1556020,'%s returns to stone.',0,2,0,0,'anzu EMOTE_BIRD_STONE');
 
 -- -1 557 000 MANA TOMBS
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
@@ -4125,7 +4143,7 @@ INSERT INTO gossip_texts (entry,content_default,comment) VALUES
 (-3000103,'I am ready to travel to you village now.','rainspeaker GOSSIP_ITEM_READY'),
 (-3000104,'<Check for pulse...>','mosswalker victim GOSSIP_ITEM_PULSE'),
 (-3000105,'Ezekiel said that you might have a certain book...','dirty larry GOSSIP_ITEM_BOOK'),
-(-3000106,'REUSE ME','REUSE ME'),
+(-3000106,'Let Marshal Windsor know that I am ready.','squire rowe GOSSIP_ITEM_WINDSOR'),
 (-3000107,'REUSE ME','REUSE ME'),
 (-3000108,'REUSE ME','REUSE ME'),
 (-3000109,'I am ready, Oronok. Let us destroy Cyrukh and free the elements!','oronok torn-heart GOSSIP_ITEM_FIGHT');
@@ -4170,7 +4188,6 @@ INSERT INTO gossip_texts (entry,content_default,comment) VALUES
 -- -3 564 000 BLACK TEMPLE
 INSERT INTO gossip_texts (entry,content_default,comment) VALUES
 (-3564000,'We are ready to fight alongside you, Akama','akama(shade) GOSSIP_ITEM_START_ENCOUNTER');
-
 
 -- -3 595 000 CULLING OF STRATHOLME
 INSERT INTO gossip_texts (entry,content_default,comment) VALUES
@@ -6539,5 +6556,15 @@ INSERT INTO script_waypoint VALUES
 (22424, 80, -3503.24, 4076.63, 92.92, 0, 'SAY_SKYWING_SUMMON'),
 (22424, 81, -3504.23, 4080.47, 92.92, 7000, 'SPELL_TRANSFORM'),
 (22424, 82, -3504.23, 4080.47, 92.92, 20000, 'SAY_SKYWING_END');
+
+DELETE FROM script_waypoint WHERE entry=17804;
+INSERT INTO script_waypoint VALUES
+(17804, 0, -9054.86, 443.58, 93.05, 0, ''),
+(17804, 1, -9079.33, 424.49, 92.52, 0, ''),
+(17804, 2, -9086.21, 419.02, 92.32, 3000, ''),
+(17804, 3, -9086.21, 419.02, 92.32, 1000, ''),
+(17804, 4, -9079.33, 424.49, 92.52, 0, ''),
+(17804, 5, -9054.38, 436.30, 93.05, 0, ''),
+(17804, 6, -9042.23, 434.24, 93.37, 5000, 'SAY_SIGNAL_SENT');
 
 -- EOF

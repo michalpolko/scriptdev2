@@ -230,6 +230,10 @@ UPDATE creature_template SET ScriptName='mob_syth_frost' WHERE entry=19204;
 UPDATE creature_template SET ScriptName='mob_syth_shadow' WHERE entry=19206;
 UPDATE creature_template SET ScriptName='boss_talon_king_ikiss' WHERE entry=18473;
 UPDATE creature_template SET ScriptName='boss_darkweaver_syth' WHERE entry=18472;
+UPDATE creature_template SET ScriptName='boss_anzu' WHERE entry=23035;
+DELETE FROM scripted_event_id WHERE id=14797;
+INSERT INTO scripted_event_id VALUES
+(14797,'event_spell_summon_raven_god');
 
 /* SHADOW LABYRINTH */
 UPDATE instance_template SET ScriptName='instance_shadow_labyrinth' WHERE map=555;
@@ -570,6 +574,7 @@ INSERT INTO scripted_areatrigger VALUES
 /* EASTERN PLAGUELANDS */
 UPDATE creature_template SET ScriptName='mobs_ghoul_flayer' WHERE entry IN (8530,8531,8532);
 UPDATE creature_template SET ScriptName='npc_darrowshire_spirit' WHERE entry=11064;
+UPDATE creature_template SET ScriptName='npc_eris_havenfire' WHERE entry=14494;
 
 /* EBON HOLD */
 UPDATE creature_template SET ScriptName='npc_death_knight_initiate' WHERE entry=28406;
@@ -1036,6 +1041,7 @@ UPDATE creature_template SET ScriptName='npc_kaya' WHERE entry=11856;
 UPDATE creature_template SET ScriptName='npc_bartleby' WHERE entry=6090;
 UPDATE creature_template SET ScriptName='npc_dashel_stonefist' WHERE entry=4961;
 UPDATE creature_template SET ScriptName='npc_lady_katrana_prestor' WHERE entry=1749;
+UPDATE creature_template SET ScriptName='npc_squire_rowe' WHERE entry=17804;
 
 /* STRANGLETHORN VALE */
 UPDATE creature_template SET ScriptName='mob_yenniku' WHERE entry=2530;
