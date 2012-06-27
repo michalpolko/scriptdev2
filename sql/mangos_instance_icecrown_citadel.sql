@@ -85,3 +85,48 @@ DELETE FROM `creature` WHERE `guid` IN (120814, 120806, 120791, 120821);
 
 UPDATE `creature_template` SET `ScriptName`='boss_blood_queen_lanathel', `AIName`='' WHERE `entry`= 37955;
 UPDATE `creature_template` SET `AIName` ='', `ScriptName`='mob_swarming_shadows' WHERE `entry`= 38163;
+
+------------------
+-- Blood Prince Council
+------------------
+
+-- --------------
+-- Lanathel intro
+-- --------------
+
+UPDATE `creature_template` SET `ScriptName`='boss_blood_queen_lanathel_intro', `AIName`='' WHERE `entry`= 38004;
+
+UPDATE `creature_template` SET `ScriptName`='npc_blood_orb_control', `AIName`='' WHERE `entry`= 38008;
+-- update Health if needed
+-- UPDATE `creature_template` SET `minhealth` = 5647725, `maxhealth` = 5647725 WHERE `entry`= 38008;
+-- UPDATE `creature_template` SET `minhealth` = 22590900, `maxhealth` = 22590900 WHERE `entry` = 38641;
+-- UPDATE `creature_template` SET `minhealth` = 7600025, `maxhealth` = 7600025 WHERE `entry` = 38773;
+-- UPDATE `creature_template` SET `minhealth` = 30469825, `maxhealth` = 30469825 WHERE `entry` = 38774;
+
+-- --------
+-- Taldaram
+-- --------
+
+UPDATE `creature_template` SET `ScriptName`='boss_taldaram_icc', `AIName`='' WHERE `entry`= 37973;
+UPDATE `creature_template` SET `ScriptName`='mob_ball_of_flames', `AIName`='' WHERE `entry` IN (38332, 38451);
+
+-- -------
+-- Valanar
+-- -------
+
+UPDATE `creature_template` SET `ScriptName`='boss_valanar_icc', `AIName`='' WHERE `entry`= 37970;
+UPDATE `creature_template` SET `ScriptName`='mob_kinetic_bomb', `AIName`='' WHERE `entry`= 38454;
+UPDATE `creature_template` SET `ScriptName`='mob_shock_vortex', `AIName`='' WHERE `entry`= 38422;
+UPDATE `creature_template` SET `ScriptName`='mob_kinetic_bomb_target', `AIName`='' WHERE `entry`= 38458;
+
+-- Unstable (Kinetic Bomb) proc on taken hit
+DELETE FROM `spell_proc_event` WHERE `entry` = 72059;
+INSERT INTO `spell_proc_event` (`entry`, `SchoolMask`, `procFlags`, `procEx`) VALUES
+(72059, 127, 0x00000008|0x00000020|0x00000080|0x00000200|0x00002000|0x00020000|0x00400000, 0x0010000);
+
+-- --------
+-- Keleseth
+-- --------
+
+UPDATE `creature_template` SET `ScriptName`='boss_keleseth_icc', `AIName`='' WHERE `entry`= 37972;
+UPDATE `creature_template` SET `ScriptName`='mob_dark_nucleus', `AIName`='' WHERE `entry`= 38369;
