@@ -78,3 +78,10 @@ INSERT INTO `spell_script_target` VALUES (72771, 1, 38508);
 DELETE FROM `creature` WHERE `guid` = 118491;
 -- and his Marines
 DELETE FROM `creature` WHERE `guid` IN (120814, 120806, 120791, 120821);
+
+------------------
+-- Queen Lana'thel
+------------------
+
+UPDATE `creature_template` SET `ScriptName`='boss_blood_queen_lanathel', `AIName`='' WHERE `entry`= 37955;
+UPDATE `creature_template` SET `AIName` ='', `ScriptName`='mob_swarming_shadows' WHERE `entry`= 38163;
